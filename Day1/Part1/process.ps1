@@ -1,4 +1,4 @@
-$data = Get-Content -Path '/Users/tkennedy/REPOS/adventOfCode2023/Day1/Part1/input.txt'
+$data = Get-Content -Path 'C:\Users\Thomas\Documents\code\REPOS\adventOfCode2023\Day1\Part1\input.txt'
 
 $sum = 0
 
