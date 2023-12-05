@@ -20,7 +20,7 @@ function checkpoint-hash {
     if ($rowTwoChar -eq "*") {
       # Now find the numbers around the special character...
       $h = try{$i-1}catch{$i}
-      $j = $i+1
+      $j = try{$i+1}catch{$i}
 
       # Row One...
       $match = [System.Text.RegularExpressions.Regex]::Match($rowOne, '\d+')
@@ -29,19 +29,11 @@ function checkpoint-hash {
           $startIndex = $match.Index
           $endIndex = $startIndex + $firstNumber.Length - 1
 
-          if ($h -) {
-            
+          if ($h -match '\d') {
+            $funSum += [int]$rowOne[$startIndex..$endIndex]
           }
           
-      } 
-
-      
-      
-
-      if($rowOne[$h..$j] -match '\d+'){
-        
       }
-      
     }
   }
 
