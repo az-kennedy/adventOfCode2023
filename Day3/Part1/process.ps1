@@ -2,6 +2,52 @@ $data = Get-Content -Path 'C:\Users\Thomas\Documents\code\REPOS\adventOfCode2023
 
 $sum = 0
 
+function checkpoint-hash {
+  param (
+    [System.Collections.Hashtable]$hashTable
+  )
+  
+  $funSum = 0
+
+  $rowOne   = $hashTable[1]
+  $rowTwo   = $hashTable[2]
+  $rowThree = $hashTable[3]
+
+  # Find the special character in row 2. We don't care about the other rows
+  for ($i = 0; $i -lt $rowTwo.Count; $i++) {
+    $rowTwoChar = $rowTwo[$i]
+
+    if ($rowTwoChar -eq "*") {
+      # Now find the numbers around the special character...
+      $h = try{$i-1}catch{$i}
+      $j = $i+1
+
+      # Row One...
+      $match = [System.Text.RegularExpressions.Regex]::Match($rowOne, '\d+')
+      if ($match.Success) {
+          $firstNumber = $match.Value
+          $startIndex = $match.Index
+          $endIndex = $startIndex + $firstNumber.Length - 1
+
+          if ($h -) {
+            
+          }
+          
+      } 
+
+      
+      
+
+      if($rowOne[$h..$j] -match '\d+'){
+        
+      }
+      
+    }
+  }
+
+  return $funSum  
+}
+
 $rowHash = @{}
 
 foreach ($row in $data) {
@@ -18,14 +64,21 @@ foreach ($row in $data) {
     $rowHash[2] = $rowHash[1]
     $rowHash[1] = $row
   }
-  Write-Host "----------------------------"
-  foreach ($row in $rowHash.GetEnumerator()) {
-    Write-Host "$($row.key) : $($row.value)"
+  # Write-Host "----------------------------"
+  # foreach ($row in $rowHash.GetEnumerator()) {
+  #   Write-Host "$($row.key) : $($row.value)"
+  # }
+  # Write-Host "----------------------------"
+
+  #Process Hash
+  if($rowHash.Count -eq 3) {
+    $sum += checkpoint-hash -hashTable $rowHash
   }
-  Write-Host "----------------------------"
-
-
 }
+
+
+
+Write-Host $sum
 
 
 
